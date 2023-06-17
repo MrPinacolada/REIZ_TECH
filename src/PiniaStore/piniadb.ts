@@ -11,6 +11,6 @@ export const Store = defineStore('DefaultStore', () => {
       area: ''
     },
     APIHeaderLoader: false,
-    APIBodyLoader:false
+    APIBodyLoader: false
   }
 })

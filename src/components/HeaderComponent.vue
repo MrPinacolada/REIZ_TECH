@@ -8,8 +8,9 @@
         />
       </section>
       <section class="headbox">
-        <span class="loader" v-if="!store.$state.APIHeaderLoader"></span>
-        <div class="current-location-wrapper" v-if="store.$state.APIHeaderLoader">
+        <span class="loader" v-if="!store.$state.APIHeaderLoader && !refuseGEO"></span>
+        <div class="errorLocation" v-if="refuseGEO"><p>Please, allow geo to see this data.</p></div>
+        <div class="current-location-wrapper" v-if="store.$state.APIHeaderLoader && !refuseGEO">
           <span :class="`fi fi-${currentISO} fis`"></span>
           <p>{{ currentName }}</p>
           <p>{{ currentArea }} km2</p>
@@ -32,6 +33,7 @@ const store = Store()
 let currentISO = computed(() => store.$state.currentCountry.iso)
 let currentName = computed(() => store.$state.currentCountry.name)
 let currentArea = computed(() => store.$state.currentCountry.area)
+let refuseGEO = ref(false)
 let successGEOCallback = async (position: { coords: { latitude: number; longitude: number } }) => {
   let latitude = position.coords.latitude
   let longitude = position.coords.longitude
@@ -40,7 +42,7 @@ let successGEOCallback = async (position: { coords: { latitude: number; longitud
   )
 }
 let errorGEOCallback = () => {
-  // store.$state.currentCountry.iso = 'tr'
+  refuseGEO.value = true
 }
 
 onMounted(() => {

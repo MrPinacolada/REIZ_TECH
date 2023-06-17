@@ -56,7 +56,8 @@ h2,
 h3,
 p,
 a,
-span {
+span,
+button {
   margin: 0;
   padding: 0;
   text-decoration: none;

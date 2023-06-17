@@ -1,6 +1,6 @@
 <template>
   <HeaderComponent />
-  <BodyComponent/>
+  <BodyComponent />
 </template>
 
 <script setup lang="ts">
