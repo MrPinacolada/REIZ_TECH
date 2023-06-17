@@ -1,9 +1,8 @@
-import { ref, computed, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 
 export const Store = defineStore('DefaultStore', () => {
   return {
-    dbCountry: [] as any,
+    dbCountry: [] as Array<any> || null,
     acceptGPS: false as any,
     currentCountry: {
       name: '',

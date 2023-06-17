@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeMount, onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { Store } from '@/PiniaStore/piniadb'
 import axios from 'axios'
 const store = Store()
@@ -44,7 +44,6 @@ let successGEOCallback = async (position: { coords: { latitude: number; longitud
 let errorGEOCallback = () => {
   refuseGEO.value = true
 }
-
 onMounted(() => {
   navigator.geolocation.getCurrentPosition(successGEOCallback, errorGEOCallback)
 })

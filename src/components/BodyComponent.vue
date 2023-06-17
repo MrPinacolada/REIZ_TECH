@@ -3,7 +3,6 @@
     <div class="loaderwrap" v-if="!store.$state.APIBodyLoader">
       <span class="loader"></span>
     </div>
-
     <div class="container-wrap" v-if="store.$state.APIBodyLoader">
       <div class="butt-box">
         <button class="optButt" @click="sortByAlphabet(true)">Sort [A-Z]</button>
@@ -22,7 +21,6 @@
           Clear filters
         </button>
       </div>
-
       <div class="all-cont-conteiner">
         <div class="country-box" v-for="item in filterredCountryList" :key="item">
           <img id="box-img" :src="item.flags.svg" alt="" />
@@ -38,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, onMounted, ref, computed, watch } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { Store } from '@/PiniaStore/piniadb'
 const store = Store()
 let filter = ref({
@@ -53,9 +51,13 @@ let unRegions = computed(() => {
 })
 let sortByAlphabet = (state: boolean) => {
   if (state) {
-    filterredCountryList.value.sort((a, b) => a.name.localeCompare(b.name))
+    filterredCountryList.value.sort((a: { name: string }, b: { name: string }) =>
+      a.name.localeCompare(b.name)
+    )
   } else {
-    filterredCountryList.value.sort((a, b) => b.name.localeCompare(a.name))
+    filterredCountryList.value.sort((a: { name: string }, b: { name: string }) =>
+      b.name.localeCompare(a.name)
+    )
   }
 }
 let sortByArea = () => {
@@ -64,7 +66,7 @@ let sortByArea = () => {
       item.area = parseInt(item.area.replace(/\s/g, ''), 10)
     }
   })
-  filterredCountryList.value.sort((a, b) => {
+  filterredCountryList.value.sort((a: { area: number }, b: { area: number }) => {
     if (typeof a.area === 'string' && typeof b.area !== 'string') {
       return -1
     } else if (typeof a.area !== 'string' && typeof b.area === 'string') {
